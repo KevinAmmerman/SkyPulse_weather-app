@@ -1,0 +1,21 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title-group class="weather_info">
+            <img mat-card-sm-image src="../../assets/img/weather_icons/sun.png">
+            <div class="weather_data_box">
+                <mat-card-title>München</mat-card-title>
+                <mat-card-subtitle class="current_weather_name">{{weather.currently.icon}}</mat-card-subtitle>
+                <mat-card-subtitle class="current_weather_name">{{weather.currently.temperature}} °C</mat-card-subtitle>
+                <div class="humidity_box">
+                    <img src="../../assets/img/weather_icons/humidity.png" alt="">
+                    <mat-card-subtitle class="current_weather_name">{{weather.currently.humidity * 100}}
+                        %</mat-card-subtitle>
+                </div>
+            </div>
+        </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+        Heute in München: Bedeckt mit einer Temperatur von 2,28°C, die sich wie 0,42°C anfühlt, bei einer
+        Luftfeuchtigkeit von 84% und einem leichten Wind aus Südost mit 6,48 km/h. Keine Niederschläge erwartet.
+    </mat-card-content>
+</mat-card>

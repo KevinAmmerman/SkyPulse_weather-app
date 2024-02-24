@@ -1,0 +1,26 @@
+.card {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.weather_info {
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.current_weather_name {
+    color: black;
+}
+
+.humidity_box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    
+    >img {
+        width: 1.5rem;
+    }
+}
