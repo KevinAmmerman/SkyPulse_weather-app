@@ -1,4 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.main_btn_style {
+    background-color: #FFB502;
+    color: black;
+    text-decoration: none;
+    padding: 0.1rem 1rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+    transition: all 150ms ease-in-out;
+}
+
+.glow-btn:hover {
+    box-shadow: 0 5px 15px rgba(195, 183, 13, 0.671);
+}

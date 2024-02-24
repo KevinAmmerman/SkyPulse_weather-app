@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3rem;
+}
+
+.logo_box {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 4rem;
+    object-position: -8px;
+}
+
+h1 {
+    color: #FFB502;
+}
