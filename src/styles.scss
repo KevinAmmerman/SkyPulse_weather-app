@@ -25,3 +25,12 @@ body {
 .glow-btn:hover {
     box-shadow: 0 5px 15px rgba(195, 183, 13, 0.671);
 }
+
+.no_padding {
+    padding: 0 !important;
+}
+
+.df_align-items_center {
+    display: flex !important;
+    align-items: center;
+}
