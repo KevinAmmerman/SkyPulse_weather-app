@@ -1,3 +1,17 @@
 <section>
     <app-current-location-weather></app-current-location-weather>
 </section>
+<div>
+    <input type="text" placeholder="search..." [(ngModel)]="input" (keyup)="search()">
+    @if (searchResults && searchResults.length) {
+        @for (loc of searchResults; track $index) {
+            <div (click)="getWeather(loc)">{{loc.properties.formatted}}</div>
+        }
+    }
+
+    @if (weatherData && weatherData.length) {
+        @for (item of weatherData; track $index) {
+            <div>{{item}}</div>
+        }
+    }
+</div>

@@ -40,4 +40,6 @@ export class CurrentLocationWeatherComponent {
       "ozone": 411.82
     }}
 
+    
+
 }
