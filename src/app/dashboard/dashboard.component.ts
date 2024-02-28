@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CurrentLocationWeatherComponent } from "../current-location-weather/current-location-weather.component";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,6 @@ import { WeatherDataService } from '../shared/services/weather-data.service';
 })
 export class DashboardComponent {
 
-    apiSchluessel = '1f0cbc28e50e4db19cb831745c5953a2';
     searchResults: any = [];
     weatherData: any = [];
     geoLocationSub = new Subscription();
