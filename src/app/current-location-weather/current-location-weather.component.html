@@ -1,44 +1,54 @@
-<!-- <mat-card class="card">
-    <mat-card-header class="no_padding">
-        <mat-card-title-group class="weather_info">
-            <img mat-card-sm-image src="../../assets/img/weather_icons/sun.png">
-            <div class="weather_data_box">
-                <mat-card-title>München</mat-card-title>
-                <mat-card-subtitle class="current_weather_name">{{weather.currently.icon}}</mat-card-subtitle>
-                <mat-card-subtitle class="current_weather_name">{{weather.currently.temperature}} °C</mat-card-subtitle>
-                <div class="humidity_box">
-                    <img src="../../assets/img/weather_icons/humidity.png" alt="">
-                    <mat-card-subtitle class="current_weather_name">{{weather.currently.humidity * 100}}
-                        %</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-title-group>
-    </mat-card-header>
-    <mat-card-content class="no_padding df_align-items_center">
-
-    </mat-card-content>
-</mat-card> -->
-
 <mat-card class="card">
     <mat-card-header>
-        <mat-card-title class="title">München's Wetter</mat-card-title>
-        <mat-card-subtitle>10. Februar 2024</mat-card-subtitle>
+        <div class="search_location_container">
+            <input type="text" placeholder="Suche Ort.." [(ngModel)]="input" (keyup)="search()">
+            @if (searchResults && searchResults.length) {
+            <div class="location_results_container">
+                @for (item of searchResults; track $index) {
+                <div class="geo_btn" (click)="getWeather(item.properties.lat, item.properties.lon)">
+                    {{item.properties.formatted}}</div>
+                }
+            </div>
+            }
+        </div>
+        @if (weatherData && weatherData.length) {
+        <ng-container>
+            <mat-card-title class="title">{{currentLocation}}'s weather</mat-card-title>
+            <mat-card-subtitle>{{weatherData[0].date}}</mat-card-subtitle>
+        </ng-container>
+        }
     </mat-card-header>
     <mat-card-content class="outer_content_container">
         <div class="inner_container_top">
+            @if (weatherData && weatherData.length) {
             <div class="content_container">
-                <h2>17°C</h2>
-                <span>Gefühlt wie</span>
-                <span>15°C</span>
+                <h2>{{currentTemp}}°C</h2>
+                <span>Feels Like</span>
+                <span>{{weatherData[0].apparentTemperatureHigh}}°C</span>
             </div>
             <div class="content_container">
-                <img src="../../assets/img/weather_icons/sun.png" alt="">
-                <span>Sunny</span>
+                <span>High {{weatherData[0].temperatureMax}}°C</span>
+                <span class="line"></span>
+                <span>Low {{weatherData[0].temperatureMin}}°C</span>
             </div>
+            <div class="content_container">
+                <img src="../../assets/img/weather_icons/{{weatherData[0].icon}}.png" alt="">
+                <span>{{weatherData[0].summary}}</span>
+            </div>
+            }
         </div>
-        <span></span>
+        <span class="line"></span>
         <div class="inner_container_bottom">
-
+            @for (item of weatherData; track $index) {
+            @if ($index !== 0) {
+            <div class="forcast_container">
+                <span>{{item.weekday}}</span>
+                <img src="../../assets/img/weather_icons/{{item.icon}}.png" alt="">
+                <span>{{item.temperatureMax}}°C</span>
+                <span>{{item.temperatureMin}}°C</span>
+            </div>
+            }
+            }
         </div>
     </mat-card-content>
 </mat-card>
