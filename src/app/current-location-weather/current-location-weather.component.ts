@@ -35,7 +35,7 @@ export class CurrentLocationWeatherComponent {
 
 
   ngOnInit() {
-    this.getWeather(this.berlin.lat, this.berlin.lon);
+    this.getWeather(this.berlin.lat, this.berlin.lon, this.currentLocation);
   }
 
 
@@ -47,7 +47,11 @@ export class CurrentLocationWeatherComponent {
 
   searchGeoLocation() {
     if (this.input !== '') {
-      this.geoLocationSub = this.geoService.searchLocation(this.input).subscribe((data: any) => this.searchResults = data.features);
+      this.geoLocationSub = this.geoService.searchLocation(this.input).subscribe((data: any) => {
+        this.searchResults = data.features
+        console.log(this.searchResults)
+      });
+
     } else {
       this.searchResults = [];
       this.geoLocationSub.unsubscribe();
@@ -67,8 +71,9 @@ export class CurrentLocationWeatherComponent {
   }
 
 
-  getWeather(lat: number, lon: number) {
+  getWeather(lat: number, lon: number, location: any) {
     this.resetVariables();
+    this.currentLocation = location;
     this.weatherDataSub = this.weatherDataService.getWeatherData(lon, lat).subscribe((data: any) => {
       this.currentTemp =  Math.round(data.currently.temperature);
       data.daily.data.forEach((day: any) => {
@@ -83,6 +88,7 @@ export class CurrentLocationWeatherComponent {
     this.currentTemp = 0;
     this.weatherData = [];
     this.searchResults = [];
+    this.input = '';
   }
 
 }
