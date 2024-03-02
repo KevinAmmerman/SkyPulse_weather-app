@@ -1,4 +1,5 @@
 export class Weather {
+    timestamp: number;
     date: string;
     weekday: string;
     icon: string;
@@ -9,6 +10,7 @@ export class Weather {
 
 
     constructor(obj: any) {
+        this.timestamp = obj.time;
         this.date = this.getDate(obj.time);
         this.weekday = this.getWeekday(obj.time)
         this.icon = obj.icon;
@@ -21,7 +23,7 @@ export class Weather {
 
     getWeekday(timestamp: number) {
         const date = new Date(timestamp * 1000);
-        const weekday = date.toLocaleDateString('de-DE', {
+        const weekday = date.toLocaleDateString('en-US', {
             weekday: 'short',
         });
         return weekday;

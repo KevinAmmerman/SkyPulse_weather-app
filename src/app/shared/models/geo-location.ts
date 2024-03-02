@@ -1,5 +1,4 @@
 export class GeoLocation {
-
     country: string;
     city: string;
     lon: number;

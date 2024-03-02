@@ -25,7 +25,6 @@ export class CurrentLocationWeatherComponent {
   search;
   currentTemp: number = 0;
   currentLocation: string = 'Berlin, Germany';
-
   berlin = {lat: 52.520008, lon: 13.404954};
 
 
@@ -48,8 +47,7 @@ export class CurrentLocationWeatherComponent {
   searchGeoLocation() {
     if (this.input !== '') {
       this.geoLocationSub = this.geoService.searchLocation(this.input).subscribe((data: any) => {
-        this.searchResults = data.features
-        console.log(this.searchResults)
+        this.searchResults = data.features;
       });
 
     } else {
