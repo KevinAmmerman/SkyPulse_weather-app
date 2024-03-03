@@ -92,7 +92,7 @@ export class CurrentLocationWeatherComponent {
 
 
   updateLocalStorage(lat: number, lon: number) {
-    const searchedWeather = { weather: this.weatherData, location: this.currentLocation, lat, lon };
+    const searchedWeather = { weather: this.weatherData, location: this.currentLocation, lat, lon, date: new Date()};
     let weatherLocalStorage = this.localStorage.getDataFromLocalStorage() || [];
     const isExisting = weatherLocalStorage.some((e: any) => e.location === this.currentLocation);
     if (!isExisting) {

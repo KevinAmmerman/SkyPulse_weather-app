@@ -39,32 +39,4 @@ export class Weather {
         });
         return formattedDate;
     }
-
-
-    public toJSON() {
-        return {
-            timestamp: this.timestamp,
-            date: this.date,
-            weekday: this.weekday,
-            icon: this.icon,
-            summary: this.summary,
-            temperatureMin: this.temperatureMin,
-            temperatureMax: this.temperatureMax,
-            apparentTemperatureHigh: this.apparentTemperatureHigh
-        }
-    }
-
-    public static fromJSON(json: any): Weather {
-        return new Weather({
-            timestamp: json.timestamp,
-            date: json.date,
-            weekday: json.weekday,
-            icon: json.icon,
-            summary: json.summary,
-            temperatureMin: json.temperatureMin,
-            temperatureMax: json.temperatureMax,
-            apparentTemperatureHigh: json.apparentTemperatureHigh
-        })
-    }
-
 }
