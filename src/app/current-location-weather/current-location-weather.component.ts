@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Weather } from '../shared/models/weather';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 @Component({
   selector: 'app-current-location-weather',
@@ -28,7 +29,7 @@ export class CurrentLocationWeatherComponent {
   berlin = {lat: 52.520008, lon: 13.404954};
 
 
-  constructor(private geoService: GeoLocationServiceService, private weatherDataService: WeatherDataService) {
+  constructor(private geoService: GeoLocationServiceService, private weatherDataService: WeatherDataService, private localStorage: LocalStorageService) {
     this.search = this.debounce(this.searchGeoLocation, 500);
   }
 
@@ -77,8 +78,8 @@ export class CurrentLocationWeatherComponent {
       data.daily.data.forEach((day: any) => {
         this.weatherData.push(new Weather(day));
       });
+      this.updateLocalStorage(lat, lon)
     })
-    console.log(this.weatherData)
   }
 
 
@@ -87,6 +88,23 @@ export class CurrentLocationWeatherComponent {
     this.weatherData = [];
     this.searchResults = [];
     this.input = '';
+  }
+
+
+  updateLocalStorage(lat: number, lon: number) {
+    const searchedWeather = { weather: this.weatherData, location: this.currentLocation, lat, lon };
+    let weatherLocalStorage = this.localStorage.getDataFromLocalStorage() || [];
+    const isExisting = weatherLocalStorage.some((e: any) => e.location === this.currentLocation);
+    if (!isExisting) {
+      const updatedWeatherLocalStorage = [...weatherLocalStorage, searchedWeather];
+      try {
+        this.localStorage.setDataToLocalStorage(updatedWeatherLocalStorage);
+      } catch (error) {
+        console.error('Failed to update local storage:', error);
+      }
+    } else {
+      return;
+    }
   }
 
 }
