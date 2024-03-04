@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Weather } from '../shared/models/weather';
 import { LocalStorageService } from '../shared/services/local-storage.service';
+import { ShareDataService } from '../shared/services/share-data.service';
+import { GeoLocation } from '../shared/models/geo-location';
 
 @Component({
   selector: 'app-current-location-weather',
@@ -25,17 +27,22 @@ export class CurrentLocationWeatherComponent {
   input: string = '';
   search;
   currentTemp: number = 0;
-  currentLocation: any = {city: 'Berlin', country: 'Deutschland'};
-  berlin = {lat: 52.520008, lon: 13.404954};
+  currentLocation: GeoLocation;
 
 
-  constructor(private geoService: GeoLocationServiceService, private weatherDataService: WeatherDataService, private localStorage: LocalStorageService) {
+  constructor(
+    private geoService: GeoLocationServiceService, 
+    private weatherDataService: WeatherDataService, 
+    private localStorage: LocalStorageService,
+    private shareData: ShareDataService
+    ) {
     this.search = this.debounce(this.searchGeoLocation, 500);
+    this.currentLocation = this.shareData.getData()
   }
 
 
   ngOnInit() {
-    this.getWeather(this.berlin.lat, this.berlin.lon, this.currentLocation.city, this.currentLocation.country);
+    this.getWeather(this.currentLocation.lat, this.currentLocation.lon);
   }
 
 
@@ -70,9 +77,14 @@ export class CurrentLocationWeatherComponent {
   }
 
 
-  getWeather(lat: number, lon: number, city: string, country: string) {
+  getWeatherOfLocation(geo: any) {
+    this.currentLocation = new GeoLocation(geo.properties);
+    this.getWeather(this.currentLocation.lat, this.currentLocation.lon)
+  }
+
+
+  getWeather(lat: number, lon: number) {
     this.resetVariables();
-    this.currentLocation = `${city}, ${country}`;
     this.weatherDataSub = this.weatherDataService.getWeatherData(lon, lat).subscribe((data: any) => {
       this.currentTemp =  Math.round(data.currently.temperature);
       data.daily.data.forEach((day: any) => {
@@ -92,9 +104,9 @@ export class CurrentLocationWeatherComponent {
 
 
   updateLocalStorage(lat: number, lon: number) {
-    const searchedWeather = { weather: this.weatherData, location: this.currentLocation, lat, lon, date: new Date()};
+    const searchedWeather = { weather: this.weatherData, city: this.currentLocation.city, country: this.currentLocation.country, lat, lon, date: new Date()};
     let weatherLocalStorage = this.localStorage.getDataFromLocalStorage() || [];
-    const isExisting = weatherLocalStorage.some((e: any) => e.location === this.currentLocation);
+    const isExisting = weatherLocalStorage.some((e: any) => e.city === this.currentLocation.city);
     if (!isExisting) {
       const updatedWeatherLocalStorage = [...weatherLocalStorage, searchedWeather];
       try {

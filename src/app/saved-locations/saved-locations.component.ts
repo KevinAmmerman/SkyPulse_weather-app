@@ -4,6 +4,9 @@ import { WeatherDataService } from '../shared/services/weather-data.service';
 import { Weather } from '../shared/models/weather';
 import { Subscription } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
+import { ShareDataService } from '../shared/services/share-data.service';
+import { Router } from '@angular/router';
+import { GeoLocation } from '../shared/models/geo-location';
 
 @Component({
   selector: 'app-saved-locations',
@@ -17,7 +20,11 @@ export class SavedLocationsComponent {
   savedWeather: Array<any> = [];
   weatherDataSub: Subscription = new Subscription();
 
-  constructor(private localStorage: LocalStorageService, private weatherService: WeatherDataService) {
+  constructor(private localStorage: LocalStorageService, 
+    private weatherService: WeatherDataService,
+    private router: Router, 
+    private dataService: ShareDataService
+    ) {
 
   }
 
@@ -61,6 +68,13 @@ export class SavedLocationsComponent {
       this.savedWeather[index].date = new Date();
     });
     this.localStorage.setDataToLocalStorage(this.savedWeather)
+  }
+
+
+  goToFullWeatherCard(data: any) {
+    const geoData = new GeoLocation(data)
+    this.dataService.setData(geoData);
+    this.router.navigate(['']);
   }
 
 }

@@ -2,7 +2,7 @@ export class GeoLocation {
     country: string;
     city: string;
     lon: number;
-    lat: string;
+    lat: number;
 
     constructor(obj: any) {
         this.country = obj.country;

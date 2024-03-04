@@ -3,7 +3,7 @@ section {
     justify-content: center;
     flex-wrap: wrap;
     gap: 2rem;
-    padding: 2rem 10rem;
+    padding: 6rem 10rem;
 }
 
 .card {
@@ -12,6 +12,7 @@ section {
     background-color: rgba(0, 0, 0, 0.2);
     color: white;
     padding: 2rem;
+    cursor: pointer;
 }
 
 .container {

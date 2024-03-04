@@ -5,7 +5,7 @@
             @if (searchResults && searchResults.length) {
             <div class="location_results_container">
                 @for (item of searchResults; track $index) {
-                <div class="geo_btn" (click)="getWeather(item.properties.lat, item.properties.lon, item.properties.city, item.properties.country)">
+                <div class="geo_btn" (click)="getWeatherOfLocation(item)">
                     {{item.properties.formatted}}</div>
                 }
             </div>
@@ -13,7 +13,7 @@
         </div>
         @if (weatherData && weatherData.length) {
         <ng-container>
-            <mat-card-title class="title">{{currentLocation}}</mat-card-title>
+            <mat-card-title class="title">{{currentLocation.city}}, {{currentLocation.country}}</mat-card-title>
             <mat-card-subtitle>{{weatherData[0].date}}</mat-card-subtitle>
         </ng-container>
         }
@@ -52,3 +52,5 @@
         </div>
     </mat-card-content>
 </mat-card>
+
+<!-- item.properties.lat, item.properties.lon, item.properties.city, item.properties.country -->
