@@ -1,20 +1,19 @@
 <section>
     @if(savedWeather && savedWeather.length) {
         @for(item of savedWeather; track $index) {
-            <mat-card>
-                <mat-card-header>
+            <mat-card class="card">
+                <mat-card-header class="header_container no_padding">
                     <mat-card-title>{{item.location}}</mat-card-title>
                     <mat-card-subtitle>{{item.weather[0].date}}</mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content>
-                    <div>
+                <mat-card-content class="container no_padding">
+                    <div class="inner_card">
                        <img src="../../assets/img/weather_icons/{{item.weather[0].icon}}.png" alt=""> 
                        <span>{{item.weather[0].summary}}</span>
                     </div>
-                    <div>
+                    <div class="inner_card">
                         <h2>{{item.weather[0].apparentTemperatureHigh}}°C</h2>
                     </div>
-
                 </mat-card-content>
             </mat-card>
         }

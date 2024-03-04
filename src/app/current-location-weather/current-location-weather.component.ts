@@ -25,7 +25,7 @@ export class CurrentLocationWeatherComponent {
   input: string = '';
   search;
   currentTemp: number = 0;
-  currentLocation: string = 'Berlin, Germany';
+  currentLocation: any = {city: 'Berlin', country: 'Deutschland'};
   berlin = {lat: 52.520008, lon: 13.404954};
 
 
@@ -35,7 +35,7 @@ export class CurrentLocationWeatherComponent {
 
 
   ngOnInit() {
-    this.getWeather(this.berlin.lat, this.berlin.lon, this.currentLocation);
+    this.getWeather(this.berlin.lat, this.berlin.lon, this.currentLocation.city, this.currentLocation.country);
   }
 
 
@@ -70,9 +70,9 @@ export class CurrentLocationWeatherComponent {
   }
 
 
-  getWeather(lat: number, lon: number, location: any) {
+  getWeather(lat: number, lon: number, city: string, country: string) {
     this.resetVariables();
-    this.currentLocation = location;
+    this.currentLocation = `${city}, ${country}`;
     this.weatherDataSub = this.weatherDataService.getWeatherData(lon, lat).subscribe((data: any) => {
       this.currentTemp =  Math.round(data.currently.temperature);
       data.daily.data.forEach((day: any) => {

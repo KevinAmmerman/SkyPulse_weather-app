@@ -5,7 +5,7 @@
             @if (searchResults && searchResults.length) {
             <div class="location_results_container">
                 @for (item of searchResults; track $index) {
-                <div class="geo_btn" (click)="getWeather(item.properties.lat, item.properties.lon, item.properties.formatted)">
+                <div class="geo_btn" (click)="getWeather(item.properties.lat, item.properties.lon, item.properties.city, item.properties.country)">
                     {{item.properties.formatted}}</div>
                 }
             </div>
