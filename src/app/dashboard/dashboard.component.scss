@@ -1,6 +1,17 @@
-section {
-    padding: 6rem 10rem;
+// section {
+//     padding: 6rem 10rem;
+//     display: flex;
+//     justify-content: center;
+//     flex-grow: 1;
+
+//     @media (width < 400px) {
+//         padding: 0;
+//     }
+// }
+main {
     display: flex;
+    align-items: center;
     justify-content: center;
-    flex-grow: 1;
+    height: 100%;
+    width: 100%;
 }

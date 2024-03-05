@@ -57,12 +57,10 @@ export class CurrentLocationWeatherComponent {
       this.geoLocationSub = this.geoService.searchLocation(this.input).subscribe((data: any) => {
         this.searchResults = data.features;
       });
-
     } else {
       this.searchResults = [];
       this.geoLocationSub.unsubscribe();
     }
-
   }
 
 

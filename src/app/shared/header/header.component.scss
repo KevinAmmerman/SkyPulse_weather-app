@@ -2,6 +2,10 @@
     display: flex;
     justify-content: space-between;
     padding: 0 3rem;
+
+    @media (width < 400px) {
+        padding: 0 1rem;
+    }
 }
 
 .logo_box {

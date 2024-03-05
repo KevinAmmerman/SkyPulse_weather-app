@@ -5,6 +5,10 @@
     flex-direction: column;
     padding: 1rem;
     gap: 1.5rem;
+
+    @media (width < 400px) {
+        padding: 1rem 0;
+    }
 }
 
 mat-card-header {
@@ -61,6 +65,10 @@ mat-card-header {
 
     >img {
         width: 4rem;
+    }
+
+    @media (width < 400px) {
+        padding: .5rem;
     }
 }
 
