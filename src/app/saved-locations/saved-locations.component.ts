@@ -41,7 +41,6 @@ export class SavedLocationsComponent {
 
   getSavedWeatherLocations() {
     this.savedWeather = this.localStorage.getDataFromLocalStorage();
-    console.log(this.savedWeather)
   }
 
 
@@ -66,8 +65,8 @@ export class SavedLocationsComponent {
       });
       this.savedWeather[index].weather = weatherDataNew;
       this.savedWeather[index].date = new Date();
+      this.localStorage.setDataToLocalStorage(this.savedWeather)
     });
-    this.localStorage.setDataToLocalStorage(this.savedWeather)
   }
 
 
@@ -76,5 +75,4 @@ export class SavedLocationsComponent {
     this.dataService.setData(geoData);
     this.router.navigate(['']);
   }
-
 }

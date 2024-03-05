@@ -118,5 +118,4 @@ export class CurrentLocationWeatherComponent {
       return;
     }
   }
-
 }
