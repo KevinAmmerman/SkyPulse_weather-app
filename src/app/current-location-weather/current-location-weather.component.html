@@ -1,7 +1,8 @@
 <mat-card class="card">
     <mat-card-header>
         <div class="search_location_container">
-            <input type="text" placeholder="Search Location.." [(ngModel)]="input" (keyup)="search()">
+            <input type="text" placeholder="Search Location.." [(ngModel)]="input" (keyup)="searchGeoLocation()">
+            <!-- <input type="text" placeholder="Search Location.." id="searchField"> -->
             @if (searchResults && searchResults.length) {
             <div class="location_results_container">
                 @for (item of searchResults; track $index) {
