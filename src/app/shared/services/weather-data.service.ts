@@ -9,6 +9,7 @@ export class WeatherDataService {
 
   constructor(private http: HttpClient) { }
 
+  // API KEYS are just for test reasons used in the frontend and this is not best practice.
   getWeatherData(lon: number, lat: number) {
     const url = `https://api.pirateweather.net/forecast/sOgfd7Inh9o7rzJ3XBYr0MjZ9hA6vWbu/${lat}%2C${lon}?exclude=minutely%2C+hourly%2C+alerts&units=ca`
     return this.http.get(url).pipe(
